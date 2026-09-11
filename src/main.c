@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include <sys/mount.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,6 +34,10 @@ int main(void)
     if (pid < 0) {
         perror("fork");
         return 1;
+    }
+
+    for (;;) {
+        wait(NULL);
     }
 
     return 0;
