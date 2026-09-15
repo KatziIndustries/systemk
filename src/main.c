@@ -22,6 +22,8 @@ int main(void)
     mount_fs("proc","/proc","proc");
     mount_fs("sysfs","/sys","sysfs");
 
+    setenv("PATH","/bin",1);
+
     pid_t pid = fork();
 
     if (pid == 0) {
