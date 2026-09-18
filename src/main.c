@@ -20,15 +20,15 @@ static void mount_fs(
 
 int main(void)
 {
-    printk(2,MOUNTING,"Device File System...");
+    printk(NO,MOUNTING,"Device File System...");
     mount_fs("devtmpfs","/dev","devtmpfs");
-    printk(0,MOUNTED,"Device File System.");
-    printk(2,MOUNTING,"Process File System...");
+    printk(OK,MOUNTED,"Device File System.");
+    printk(NO,MOUNTING,"Process File System...");
     mount_fs("proc","/proc","proc");
-    printk(0,MOUNTED,"Process File System.");
-    printk(2,MOUNTING,"System Hardware File System...");
+    printk(OK,MOUNTED,"Process File System.");
+    printk(NO,MOUNTING,"System Hardware File System...");
     mount_fs("sysfs","/sys","sysfs");
-    printk(0,MOUNTED,"System Hardware File System.");
+    printk(OK,MOUNTED,"System Hardware File System.");
 
     setenv("PATH","/bin",1);
 

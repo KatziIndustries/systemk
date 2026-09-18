@@ -3,6 +3,7 @@
 
 #define FAIL 0
 #define OK 1
+#define NO 2
 
 #define REACHED "Reached"
 #define LISTENING "Listening"
