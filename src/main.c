@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "printk.h"
+#include "service.h"
 
 static void mount_fs(
     const char *source,
@@ -31,6 +32,8 @@ int main(void)
     printk(OK,MOUNTED,"System Hardware File System.");
 
     setenv("PATH","/bin",1);
+
+    service();
 
     pid_t pid = fork();
 
