@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-#include "printk.h"
+#include "daemon/printk.h"
 
 void printk(int status, char *action, char *str)
 {

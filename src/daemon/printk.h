@@ -1,3 +1,12 @@
+// SPDX-License-Identifier: GPL-3.0
+/* printk.h
+ *
+ * Logger
+ *
+ * Author:
+ * JRBlockkop <jrblockkop@gmail.com>
+*/
+
 #ifndef PRINTK_H
 #define PRINTK_H
 
@@ -12,7 +21,6 @@
 #define STARTING "Starting"
 #define STARTED "Started" 
 #define CREATED "Created"
-
 
 void printk(int status, char *action, char *str);
 
