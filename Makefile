@@ -4,22 +4,33 @@ PATCHLEVEL = 1
 
 #Compiler Options
 CC = gcc
-CC_FLAGS = -static -O2 -Wall -Wextra
+CFLAGS = -Isrc -static -O2 -Wall -Wextra
 
-all:
-	mkdir -p build
-	make daemon
-	make cli
+#Source Code Files
+DAEMON_SRC := $(wildcard src/daemon/*.c)
+DAEMON_OBJ := $(patsubst src/daemon/%.c,build/daemon/%.o,$(DAEMON_SRC))
+CLI_SRC := $(wildcard src/cli/*.c)
+CLI_OBJ := $(patsubst src/cli/%.c,build/cli/%.o,$(CLI_SRC))
 
-daemon:
-	mkdir -p build/daemon
-	$(CC) $(CC_FLAGS) -c src/daemon/*.c -o build/daemon/daemon.o
-	$(CC) $(CC_FLAGS) -c src/services/*.c -o build/daemon/services.o
+.PHONY: all daemon cli clean
 
-	$(CC) build/daemon/*.o -o build/systemk
+all: daemon cli
 
-cli:
-	mkdir -p build/cli
-	$(CC) $(CC_FLAGS) -c src/cli/*.c -o build/cli/cli.o
+daemon: $(DAEMON_OBJ)
+	$(CC) $^ -o build/systemk
 
-	$(CC) build/cli/*.o -o build/katzictl
+cli: $(CLI_OBJ)
+	$(CC) $^ -o build/katzictl
+
+clean:
+	rm -fr build
+
+#Daemon Pattern Rule
+build/daemon/%.o: src/daemon/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+#Cli Pattern Rule
+build/cli/%.o: src/cli/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
