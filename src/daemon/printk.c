@@ -1,3 +1,12 @@
+// SPDX-License-Identifier: GPL-3.0
+/* printk.c
+ *
+ * Logger
+ *
+ * Author:
+ * JRBlockkop <jrblockkop@gmail.com>
+*/
+
 #include <stdio.h>
 
 #include "printk.h"
