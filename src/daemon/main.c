@@ -18,6 +18,7 @@
 #include <sys/wait.h>
 
 #include "daemon/printk.h"
+#include "daemon/tty.h"
 #include "services/services.h"
 
 static int mount_fs(
@@ -52,19 +53,7 @@ int main(void)
 
     services_start();
 
-    pid_t pid = fork();
-
-    if (pid == 0) {
-        execl("/bin/ksh","ksh",(char *)NULL);
-
-        perror("exec ksh");
-        _exit(127);
-    }
-
-    if (pid < 0) {
-        perror("fork");
-        return 1;
-    }
+    spawn_tty();
 
     for (;;) {
         wait(NULL);
